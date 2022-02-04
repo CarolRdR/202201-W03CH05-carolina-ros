@@ -30,6 +30,16 @@ async function app() {
         template += `</ul></nav>`;
         document.querySelector('.pokemon-list').innerHTML += template;
     }
+
+    async function nextButton(index) {
+        const URL_POKEMON =
+            'https://pokeapi.co/api/v2/pokemon?limit=25&offset=0';
+        const btn = await fetch(URL_POKEMON);
+        return (btn += 25);
+    }
+    document
+        .querySelectorAll('#next-page')
+        .addEventListener('click', nextButton());
 }
 
 document.addEventListener('DOMContentLoaded', app);
