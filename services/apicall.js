@@ -1,6 +1,6 @@
-export async function app() {
+async function app() {
     let index = 0;
-    let URL_POKEMON = ` https://pokeapi.co/api/v2/pokemon?limit=25&offset=${index}`;
+    let URL_POKEMON = `https://pokeapi.co/api/v2/pokemon?limit=25&offset=${index}`;
     let dataPokemon = await initiatePokemon(URL_POKEMON);
     showHeader();
     showList(dataPokemon);
@@ -28,9 +28,10 @@ export async function app() {
         let template = '';
 
         dataPokemon.results.forEach((item) => {
+            // console.log(dataPokemon);
             template += `
                 <li>
-                    <a href= "">${item.name}</a>
+                    <a href= "../public/details.html?${item.url}">${item.name}</a>
                 </li>`;
         });
 
@@ -49,17 +50,15 @@ export async function app() {
     }
 
     async function buttonNext() {
-        index += 25;
-        URL_POKEMON = ` https://pokeapi.co/api/v2/pokemon?limit=25&offset=${index}`;
-        let dataPokemon = await initiatePokemon(URL_POKEMON);
+        URL_POKEMON = dataPokemon.next;
+        dataPokemon = await initiatePokemon(URL_POKEMON);
         showList(dataPokemon);
     }
     document.querySelector('.next-page').addEventListener('click', buttonNext);
 
     async function buttonPrevious() {
-        index -= 25;
-        URL_POKEMON = ` https://pokeapi.co/api/v2/pokemon?limit=25&offset=${index}`;
-        let dataPokemon = await initiatePokemon(URL_POKEMON);
+        URL_POKEMON = dataPokemon.previous;
+        dataPokemon = await initiatePokemon(URL_POKEMON);
         showList(dataPokemon);
     }
     document
