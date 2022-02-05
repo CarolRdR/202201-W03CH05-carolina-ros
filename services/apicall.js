@@ -55,6 +55,16 @@ export async function app() {
         showList(dataPokemon);
     }
     document.querySelector('.next-page').addEventListener('click', buttonNext);
+
+    async function buttonPrevious() {
+        index -= 25;
+        URL_POKEMON = ` https://pokeapi.co/api/v2/pokemon?limit=25&offset=${index}`;
+        let dataPokemon = await initiatePokemon(URL_POKEMON);
+        showList(dataPokemon);
+    }
+    document
+        .querySelector('.previous-page')
+        .addEventListener('click', buttonPrevious);
 }
 document.addEventListener('DOMContentLoaded', app);
 /*let buttonPrevious = document.querySelectorAll('.previous-page');
