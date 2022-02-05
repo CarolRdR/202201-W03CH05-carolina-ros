@@ -1,6 +1,7 @@
 async function app() {
     let index = 0;
-    let URL_POKEMON = `https://pokeapi.co/api/v2/pokemon?limit=25&offset=${index}`;
+    let limit;
+    let URL_POKEMON = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${index}`;
     let dataPokemon = await initiatePokemon(URL_POKEMON);
     showHeader();
     showList(dataPokemon);
@@ -10,16 +11,22 @@ async function app() {
         const response = await fetch(URL_POKEMON);
         return response.json();
     }
+    /*const pokemonDetails = await Promise.all(
+        dataPokemon.map(async (pokemon) => {
+            const response = await fetch(pokemon.sprites);
+            return response.json();
+        })
+    );*/
 
     function showHeader() {
         let template = '';
         template += `<h1>Pokémon</h1>
-                        <img src="./pokemon-logo.svg" alt="Pokemon Logo">
-                        <nav>
-                        <ul>
+                        <img src="./pokemon-logo.svg" alt="Pokemon Logo"></img>
+                        <nav><ul>
                             <li><a href="">Home</a></li>
                             <li><a href="">Favourites</a></li>
-                        <nav><ul>`;
+                        </ul></nav>`;
+        template += `SHOWING ${URL_POKEMON.limit} OF 1118`;
 
         document.querySelector('.header').innerHTML += template;
     }
@@ -31,11 +38,10 @@ async function app() {
             // console.log(dataPokemon);
             template += `
                 <li>
-                    <a href= "../public/details.html?${item.url}">${item.name}</a>
+                <img src=${item.sprites}>
+                    <a href= "../public/details.html?id=${item.url}">${item.name} </a>
                 </li>`;
         });
-
-        template += `</ul></nav>`;
 
         document.querySelector('.pokemon-list').innerHTML = template;
     }
