@@ -1,16 +1,17 @@
-async function app() {
-    const URL_POKEMON = 'https://pokeapi.co/api/v2/pokemon?limit=25&offset=0';
-    const data = await initiatePokemon();
-    showPokemon(data);
+export async function app() {
+    let index = 0;
+    let URL_POKEMON = ` https://pokeapi.co/api/v2/pokemon?limit=25&offset=${index}`;
+    let dataPokemon = await initiatePokemon(URL_POKEMON);
+    showHeader();
+    showList(dataPokemon);
+    showButton();
 
     async function initiatePokemon() {
         const response = await fetch(URL_POKEMON);
         return response.json();
     }
 
-    function showPokemon(data) {
-        console.log(data);
-        const items = data.results;
+    function showHeader() {
         let template = '';
         template += `<h1>Pokémon</h1>
                         <img src="./pokemon-logo.svg" alt="Pokemon Logo">
@@ -20,26 +21,53 @@ async function app() {
                             <li><a href="">Favourites</a></li>
                         <nav><ul>`;
 
-        items.forEach((itemPokemon) => {
+        document.querySelector('.header').innerHTML += template;
+    }
+
+    function showList(dataPokemon) {
+        let template = '';
+
+        dataPokemon.results.forEach((item) => {
             template += `
                 <li>
-                    <a href= "">${itemPokemon.name}</a>
+                    <a href= "">${item.name}</a>
                 </li>`;
         });
 
         template += `</ul></nav>`;
-        document.querySelector('.pokemon-list').innerHTML += template;
+
+        document.querySelector('.pokemon-list').innerHTML = template;
     }
 
-    async function nextButton(index) {
-        const URL_POKEMON =
-            'https://pokeapi.co/api/v2/pokemon?limit=25&offset=0';
-        const btn = await fetch(URL_POKEMON);
-        return (btn += 25);
+    function showButton() {
+        let template = '';
+        template += `
+                    <button class="previous-page">Previous Page</button>
+                    <button class="next-page">Next Page</button>
+                `;
+        document.querySelector('.button-navegation').innerHTML = template;
     }
-    document
-        .querySelectorAll('#next-page')
-        .addEventListener('click', nextButton());
+
+    async function buttonNext() {
+        index += 25;
+        URL_POKEMON = ` https://pokeapi.co/api/v2/pokemon?limit=25&offset=${index}`;
+        let dataPokemon = await initiatePokemon(URL_POKEMON);
+        showList(dataPokemon);
+    }
+    document.querySelector('.next-page').addEventListener('click', buttonNext);
 }
-
 document.addEventListener('DOMContentLoaded', app);
+/*let buttonPrevious = document.querySelectorAll('.previous-page');
+
+    buttonPrevious.forEach(function (e) {
+        e.addEventListener('click', () => {
+            buttonNext('transitioned').innerHTML += data.previous;
+        });
+    });*/
+
+/*initiatePokemon.forEach((itemPokemon) => {
+        let buttonNext = document.querySelectorAll('.next-page');
+        buttonNext[itemPokemon].addEventListener('click', () => {
+            buttonNext.innerHTML += template;
+        });
+    });*/
