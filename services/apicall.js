@@ -23,8 +23,8 @@ async function app() {
         template += `<h1>Pokémon</h1>
                         <div class="pokemon-logo"><img src="./pokemon-logo.svg" alt="Pokemon Logo"></img></div>
                         <nav><ul class="pokemon__navigation">
-                            <li class="pokemon__navigation-home"><a href="../public/index.html">Home</a></li>
-                            <li class="pokemon__navigation-favourites"><a href="../public/favourites.html">Favourites</a></li>
+                            <li><a class="pokemon__navigation-home" href="../public/index.html">Home</a></li>
+                            <li><a class="pokemon__navigation-favourites"href="../public/favourites.html">Favourites</a></li>
                         </ul></nav>`;
         template += `<div class="pokemon-showing">SHOWING ${index} OF 1118</div>`;
 
@@ -38,7 +38,7 @@ async function app() {
             // console.log(dataPokemon);
             template += `
                 <li>
-                    <a href= "../public/details.html?id=${item.url}">${item.name} </a>
+                    <a class ="pokemon-list__name" href= "../public/details.html?id=${item.url}">${item.name} </a>
                 </li>`;
         });
 
@@ -48,10 +48,10 @@ async function app() {
     function showButton() {
         let template = '';
         template += `
-                    <button class="previous-page">Previous Page</button>
-                    <button class="next-page">Next Page</button>
-                `;
-        document.querySelector('.button-navegation').innerHTML = template;
+                           <button class="previous-page">Previous Page</button>
+                           <button class="next-page">Next Page</button>
+                      `;
+        document.querySelector('.button-navigation').innerHTML = template;
     }
 
     async function buttonNext() {
