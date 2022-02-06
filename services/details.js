@@ -1,13 +1,13 @@
 async function app() {
-    let id = window.location.href.split('=')[1];
-    let URL_POKEMON = `${id}`;
+    let url_pokemon = window.location.href.split('=')[1];
+    let URL_POKEMON = `${url_pokemon}`;
     let dataPokemon = await initiatePokemon(URL_POKEMON, {
         mode: 'cors',
     });
     console.log(window.location.search.split('=')[1]);
     showHeader();
     showList(dataPokemon);
-    addPokemon(dataPokemon);
+    addPokemon();
 
     async function initiatePokemon() {
         const response = await fetch(URL_POKEMON);
@@ -50,9 +50,9 @@ async function app() {
                </div>`;
 
         template += `
-        <div class="button-add-delete">
+        <div class="button-add">
                     <button class="add-favourite">Add Favourite</button>
-                    <button class="delete-favourite">Delete Favourite</button>
+
                </div>`;
 
         document.querySelector('.pokemon-detail').innerHTML = template;
@@ -68,19 +68,12 @@ async function app() {
         .querySelector('.add-favourite')
         .addEventListener('click', handleAdd);
 
-    /*async function deleteFavourite() {
-        URL_POKEMON = dataPokemon;
-        dataPokemon = await initiatePokemon(URL_POKEMON);
-        showList(dataPokemon);
-        console.log('delete');
-    }
-    document
-        .querySelector('.delete-favourite')
-        .addEventListener('click', deleteFavourite);*/
-
     function handleAdd() {
         const dataInfo = {};
+        dataInfo.id = dataPokemon.id;
         dataInfo.name = dataPokemon.name;
+        dataInfo.url = url_pokemon;
+        dataInfo.image = dataPokemon.sprites.front_default;
         console.log(dataInfo);
 
         fetch('http://localhost:3000/Pokemon/', {
@@ -102,86 +95,3 @@ async function app() {
     }
 }
 document.addEventListener('DOMContentLoaded', app);
-
-/*async function detail() {
-    const fetchData = async (id) => {
-        try {
-            const response = await fetch(
-                `https://pokeapi.co/api/v2/pokemon/${id}/`
-            );
-            const data = await response.json();
-            showCard(data);
-        } catch (error) {
-            console.log(error);
-            showCard(data);
-        }
-    };
-    const showCard = (pokemon) => {
-        let template = '';
-        console.log(pokemon);
-
-        fetchData.forEach((id) => {
-            template += `
-            <div class="pokemon-card"></div>
-                <li>
-                    <a href= "../public/details.html?id=${id}">Name: ${id.name}</a>
-                </li>`;
-        });
-    };
-
-    showHeader();
-    showDetail(fetchData);
-    addButton();
-    //showDetail(dataPokemon);
-
-    // console.log(window.location.search.split('=')[1]);
-
-    function showHeader() {
-        let template = '';
-        template += `<h1>Pokémon</h1>
-                        <img src="./pokemon-logo.svg" alt="Pokemon Logo">
-                        <nav><ul>
-                            <li><a href="../public/index.html">Home</a></li>
-                            <li><a href="">Favourites</a></li>
-                        </ul></nav>`;
-
-        document.querySelector('.header').innerHTML += template;
-    }
-
-    function showDetail(fetchData) {
-        let template = '';
-
-        fetchData.forEach((id) => {
-            template += `
-            <div class="pokemon-card"></div>
-                <li>
-                    <a href= "../public/details.html?id=${id}">Name: ${id.name}</a>
-                </li>`;
-        });
-
-        document.querySelector('.pokemon-detail').innerHTML += template;
-    }
-
-    function addButton() {
-        let template = '';
-        template += `
-                    <button class="add-pokemon">Add To Favourites</button>
-                    <button class="delete-pokemon">Delete From Favourites</button>
-                `;
-        document.querySelector('.button-add').innerHTML += template;
-    }
-
-    /*async function buttonNext() {
-        URL_POKEMON = dataPokemon.next;
-        dataPokemon = await initiatePokemon(URL_POKEMON);
-        showList(dataPokemon);
-    }
-    document.querySelector('.next-page').addEventListener('click', buttonNext);
-
-    async function buttonPrevious() {
-        URL_POKEMON = dataPokemon.previous;
-        dataPokemon = await initiatePokemon(URL_POKEMON);
-        showList(dataPokemon);
-    }
-}
-document.addEventListener('DOMContentLoaded', detail);*/

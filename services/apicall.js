@@ -38,7 +38,6 @@ async function app() {
             // console.log(dataPokemon);
             template += `
                 <li>
-                <img src=${item.sprites}>
                     <a href= "../public/details.html?id=${item.url}">${item.name} </a>
                 </li>`;
         });

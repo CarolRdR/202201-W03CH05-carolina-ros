@@ -4,11 +4,11 @@
     margin: 0;
     text-decoration: none;
     list-style-type: none;
-    background: #fceabb; /* fallback for old browsers */
+    background: #ebd9ab; /* fallback for old browsers */
     background: -webkit-linear-gradient(
         to right,
-        #f8b500,
-        #fceabb
+        #d3ab3d,
+        #f1cb68
     ); /* Chrome 10-25, Safari 5.1-6 */
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
@@ -29,16 +29,21 @@ img {
     justify-content: space-between;
     align-content: center;
     padding: 12rem;
-    padding-bottom: 4rem;
-    padding-top: 4rem;
+    padding-bottom: 2rem;
+    padding-top: 2rem;
 }
 .pokemon__navigation-home {
     font-size: 25px;
     font-weight: bold;
-    border: 1px solid rgb(228, 191, 29);
+    border: 1px solid #d3ab3d;
     padding: 2rem;
     border-radius: 1rem;
     color: rgb(52, 70, 231);
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.pokemon__navigation-home:hover {
+    background-color: #d3ab3d;
 }
 .pokemon__navigation-favourites {
     font-size: 25px;
@@ -47,17 +52,25 @@ img {
     padding: 2rem;
     border-radius: 1rem;
     color: rgb(52, 70, 231);
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.pokemon__navigation-favourites:hover {
+    background-color: #dfc21c;
 }
 h2 {
     padding: 3rem;
     display: flex;
     justify-content: center;
+    padding-bottom: 1rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .pokemon-images {
     display: flex;
     justify-content: center;
     flex-direction: row;
+    padding-top: 0.2rem;
 }
 .pokemon-description {
     text-align: center;
@@ -66,9 +79,23 @@ h2 {
     margin: 2rem;
 }
 
-.button-add-delete {
+.button-add {
     display: flex;
-    justify-content: space-between;
-    padding: 25rem;
+    justify-content: center;
+    align-content: center;
+    border: #3320db;
+    cursor: pointer;
     padding-top: 2rem;
+}
+.add-favourite {
+    border: 2px solid #dfc21c;
+    border-radius: 1rem;
+    padding: 0.5rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-weight: bold;
+    color: rgb(52, 70, 231);
+}
+.add-favourite:hover {
+    color: #3320db;
+    background-color: #dfc21c;
 }
