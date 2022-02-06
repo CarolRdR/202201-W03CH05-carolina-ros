@@ -1,10 +1,13 @@
 async function app() {
     let id = window.location.href.split('=')[1];
     let URL_POKEMON = `${id}`;
-    let dataPokemon = await initiatePokemon(URL_POKEMON);
+    let dataPokemon = await initiatePokemon(URL_POKEMON, {
+        mode: 'cors',
+    });
     console.log(window.location.search.split('=')[1]);
     showHeader();
     showList(dataPokemon);
+    addPokemon(dataPokemon);
 
     async function initiatePokemon() {
         const response = await fetch(URL_POKEMON);
@@ -33,17 +36,17 @@ async function app() {
         let template = '';
         template += `
         <h2>${dataPokemon.name}</h2>
-        <div class="pokemon-detail">
+        <div class="pokemon-images">
         <img class="pokemon-image" src="${dataPokemon.sprites.front_default}" alt="Pokemon shiny"></img>
         <img class="pokemon-image" src="${dataPokemon.sprites.front_shiny}" alt="Pokemon shiny"></img>
         </div>`;
 
         template += `
-               <div class="pokemon-detail">
-               <div class="weight">Weight: ${dataPokemon.weight}</div>
-               <div class="height">Height: ${dataPokemon.height}</div>
-               <div class="species">Species: ${dataPokemon.species.name}</div>
-               <div class="moves">Moves: ${dataPokemon.moves[0].move.name}</div>
+               <div class="pokemon-description">
+                 <div class="characteristic weight">Weight: ${dataPokemon.weight}</div>
+                 <div class="characteristic height">Height: ${dataPokemon.height}</div>
+                 <div class="characteristic species">Species: ${dataPokemon.species.name}</div>
+                 <div class="characteristic moves">Moves: ${dataPokemon.moves[0].move.name}</div>
                </div>`;
 
         template += `
@@ -55,21 +58,48 @@ async function app() {
         document.querySelector('.pokemon-detail').innerHTML = template;
     }
 
-    /*async function buttonNext() {
-        URL_POKEMON = dataPokemon.next;
+    async function addPokemon() {
+        URL_POKEMON = dataPokemon.name;
         dataPokemon = await initiatePokemon(URL_POKEMON);
+
         showList(dataPokemon);
     }
-    document.querySelector('.next-page').addEventListener('click', buttonNext);
+    document
+        .querySelector('.add-favourite')
+        .addEventListener('click', handleAdd);
 
-    async function buttonPrevious() {
-        URL_POKEMON = dataPokemon.previous;
+    /*async function deleteFavourite() {
+        URL_POKEMON = dataPokemon;
         dataPokemon = await initiatePokemon(URL_POKEMON);
         showList(dataPokemon);
-    }*/
+        console.log('delete');
+    }
     document
-        .querySelector('.previous-page')
-        .addEventListener('click', buttonPrevious);
+        .querySelector('.delete-favourite')
+        .addEventListener('click', deleteFavourite);*/
+
+    function handleAdd() {
+        const dataInfo = {};
+        dataInfo.name = dataPokemon.name;
+        console.log(dataInfo);
+
+        fetch('http://localhost:3000/Pokemon/', {
+            method: 'POST',
+            body: JSON.stringify(dataInfo),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+            }),
+            mode: 'cors',
+        })
+            .then((response) => {
+                console.log(response);
+                return response.json();
+            })
+            .then((data) => console.log(data))
+            .catch((error) => {
+                console.log('Error:', error);
+            });
+    }
 }
 document.addEventListener('DOMContentLoaded', app);
 

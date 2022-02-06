@@ -1,16 +1,36 @@
 {
-    "Pokemon": [
-        {
-            "id": 1,
-            "name": "bulbasaur",
-            "url": "https://pokeapi.co/api/v2/pokemon/1/",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-        },
-        {
-            "id": 2,
-            "name": "ivysaur",
-            "url": "https://pokeapi.co/api/v2/pokemon/2/",
-            "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
-        }
-    ]
+  "Pokemon": [
+    {
+      "id": 1,
+      "name": "bulbasaur",
+      "url": "https://pokeapi.co/api/v2/pokemon/1/",
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
+    },
+    {
+      "id": 2,
+      "name": "ivysaur",
+      "url": "https://pokeapi.co/api/v2/pokemon/2/",
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png"
+    },
+    {
+      "name": "jigglypuff",
+      "id": 3
+    },
+    {
+      "name": "pidgeotto",
+      "id": 4
+    },
+    {
+      "name": "pidgeotto",
+      "id": 5
+    },
+    {
+      "name": "pidgeotto",
+      "id": 6
+    },
+    {
+      "name": "pidgeotto",
+      "id": 7
+    }
+  ]
 }

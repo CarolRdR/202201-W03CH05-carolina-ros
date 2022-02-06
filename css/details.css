@@ -53,18 +53,22 @@ h2 {
     display: flex;
     justify-content: center;
 }
-.pokemon-image {
+
+.pokemon-images {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    width: 20rem;
-    height: 5rem;
-    padding: 6rem;
+    flex-direction: row;
+}
+.pokemon-description {
+    text-align: center;
+}
+.characteristic {
+    margin: 2rem;
 }
 
-.pokemon-detail {
+.button-add-delete {
     display: flex;
-    justify-content: left;
-    flex-direction: column;
-    padding: 5rem;
+    justify-content: space-between;
+    padding: 25rem;
+    padding-top: 2rem;
 }
