@@ -1,4 +1,5 @@
 async function app() {
+    let fetchId = [];
     let URL_POKEMON_LOCAL = `http://localhost:3000/Pokemon/`;
     let dataPokemon = await initiatePokemon(URL_POKEMON_LOCAL);
     showHeader();
@@ -28,44 +29,103 @@ async function app() {
         document.querySelector('.header').innerHTML += template;
     }
 
-    function showList(dataPokemon) {
-        let template = '';
-
-        dataPokemon.forEach((item) => {
-            // console.log(dataPokemon);
-            template += `
-                <li>
-                <img src=${item.image}>
-                    <a href= "../public/details.html?id=${item.url}">${item.name} </a>
-                </li>`;
-        });
-
-        document.querySelector('.pokemon-favourite').innerHTML = template;
-    }
-
     function showButton() {
         let template = '';
         template += `
                     <button class="previous-page">Previous Page</button>
                     <button class="next-page">Next Page</button>
                 `;
-        document.querySelector('.button-navegation').innerHTML = template;
+        document.querySelector('.button-navegation');
     }
 
-    async function buttonNext() {
-        URL_POKEMON = dataPokemon.next;
-        dataPokemon = await initiatePokemon(URL_POKEMON);
-        showList(dataPokemon);
-    }
-    document.querySelector('.next-page').addEventListener('click', buttonNext);
+    function showList(dataPokemon) {
+        let template = '';
 
-    async function buttonPrevious() {
-        URL_POKEMON = dataPokemon.previous;
-        dataPokemon = await initiatePokemon(URL_POKEMON);
-        showList(dataPokemon);
+        dataPokemon.forEach((item, index) => {
+            template += `
+                <li>
+                <img src=${item.image}>
+                    <a href= "../public/details.html?id=${item.url}">${item.name} </a>
+                </li>`;
+            template += `
+                <div class="button-delete">
+                    <button class="delete-favourite">Delete Favourite</button>
+                </div>`;
+
+            fetchId.push({ name: item.name, id: item.id, index: index });
+        });
+        console.log(fetchId);
+        let idDelete = '';
+        document.querySelector('.pokemon-delete').innerHTML = template;
+        let buttonDelete = document.querySelectorAll('.delete-favourite');
+        buttonDelete.forEach(function (e, i) {
+            e.addEventListener('click', () => {
+                if (fetchId[i].index === i) {
+                    idDelete = fetchId[i].id;
+                    console.log(idDelete);
+                }
+
+                //funcion que borra por id
+                fetch('http://localhost:3000/Pokemon/' + idDelete, {
+                    method: 'DELETE',
+                })
+                    .then((response) => {
+                        return response.json();
+                    })
+                    .then((data) => console.log(data))
+                    .catch((error) => {
+                        console.log('Error:', error);
+                    });
+                console.log('DELETEE', index);
+            });
+        });
     }
-    document
-        .querySelector('.previous-page')
-        .addEventListener('click', buttonPrevious);
+    /*deleteItems(id) {
+        buttonDelete.splice(id, 1);
+        //this.tasks.filter((item) => item.id != id);
+        localStorage.setItem(STORE_NAME, JSON.stringify(buttonDelete));
+        location.reload();
+       }*/
+
+    /*async function deleteFavourite() {
+        URL_POKEMON = dataPokemon;
+        dataPokemon = await initiatePokemon(URL_POKEMON_LOCAL);
+        showList(dataPokemon);
+    }*/
+    /*document
+        .querySelectorAll('.delete-favourite')
+        .addEventListener('click', handleDelete);*/
+
+    /*function handleDelete() {
+        console.log('delete');
+        const dataInfo = {};
+        dataInfo.id = dataPokemon.id;
+        dataInfo.name = dataPokemon.name;
+        dataInfo.url = url_pokemon;
+        dataInfo.image = dataPokemon.sprites.front_default;
+
+        fetch('http://localhost:3000/Pokemon/${id}', {
+            method: 'DELETE',
+
+            headers: new Headers({
+                'Content-Type': 'application/json',
+            }),
+            mode: 'cors',
+        })
+            .then((response) => {
+                return response.json();
+            })
+            .then((response) => {
+                if (response.success) {
+                    let category = state.category.filter(
+                        (dataInfo) =>
+                            dataInfo.URL_POKEMON_LOCAL !== URL_POKEMON_LOCAL
+                    );
+                    removeItem({ category });
+                    return dataInfo;
+                }
+            });
+    }*/
 }
+
 document.addEventListener('DOMContentLoaded', app);
