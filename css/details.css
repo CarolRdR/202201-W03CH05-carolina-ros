@@ -1,0 +1,70 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style-type: none;
+    background: #fceabb; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #f8b500,
+        #fceabb
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+h1 {
+    display: none;
+}
+.pokemon-logo {
+    display: flex;
+    justify-content: center;
+    padding: 4rem;
+}
+img {
+    height: 8rem;
+}
+.pokemon__navigation {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 12rem;
+    padding-bottom: 4rem;
+    padding-top: 4rem;
+}
+.pokemon__navigation-home {
+    font-size: 25px;
+    font-weight: bold;
+    border: 1px solid rgb(228, 191, 29);
+    padding: 2rem;
+    border-radius: 1rem;
+    color: rgb(52, 70, 231);
+}
+.pokemon__navigation-favourites {
+    font-size: 25px;
+    font-weight: bold;
+    border: 1px solid rgb(228, 191, 29);
+    padding: 2rem;
+    border-radius: 1rem;
+    color: rgb(52, 70, 231);
+}
+h2 {
+    padding: 3rem;
+    display: flex;
+    justify-content: center;
+}
+.pokemon-image {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 20rem;
+    height: 5rem;
+    padding: 6rem;
+}
+
+.pokemon-detail {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    padding: 5rem;
+}

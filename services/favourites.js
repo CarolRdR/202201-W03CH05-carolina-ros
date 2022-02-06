@@ -1,14 +1,12 @@
 async function app() {
-    let index = 0;
-    let limit;
-    let URL_POKEMON = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${index}`;
-    let dataPokemon = await initiatePokemon(URL_POKEMON);
+    let URL_POKEMON_LOCAL = `http://localhost:3000/Pokemon/`;
+    let dataPokemon = await initiatePokemon(URL_POKEMON_LOCAL);
     showHeader();
     showList(dataPokemon);
     showButton();
 
     async function initiatePokemon() {
-        const response = await fetch(URL_POKEMON);
+        const response = await fetch(URL_POKEMON_LOCAL);
         return response.json();
     }
     /*const pokemonDetails = await Promise.all(
@@ -26,7 +24,6 @@ async function app() {
                             <li class="pokemon__navigation-home"><a href="../public/index.html">Home</a></li>
                             <li class="pokemon__navigation-favourites"><a href="../public/favourites.html">Favourites</a></li>
                         </ul></nav>`;
-        template += `<div class="pokemon-showing">SHOWING ${index} OF 1118</div>`;
 
         document.querySelector('.header').innerHTML += template;
     }
@@ -34,16 +31,16 @@ async function app() {
     function showList(dataPokemon) {
         let template = '';
 
-        dataPokemon.results.forEach((item) => {
+        dataPokemon.forEach((item) => {
             // console.log(dataPokemon);
             template += `
                 <li>
-                <img src=${item.sprites}>
+                <img src=${item.image}>
                     <a href= "../public/details.html?id=${item.url}">${item.name} </a>
                 </li>`;
         });
 
-        document.querySelector('.pokemon-list').innerHTML = template;
+        document.querySelector('.pokemon-favourite').innerHTML = template;
     }
 
     function showButton() {
@@ -72,17 +69,3 @@ async function app() {
         .addEventListener('click', buttonPrevious);
 }
 document.addEventListener('DOMContentLoaded', app);
-/*let buttonPrevious = document.querySelectorAll('.previous-page');
-
-    buttonPrevious.forEach(function (e) {
-        e.addEventListener('click', () => {
-            buttonNext('transitioned').innerHTML += data.previous;
-        });
-    });*/
-
-/*initiatePokemon.forEach((itemPokemon) => {
-        let buttonNext = document.querySelectorAll('.next-page');
-        buttonNext[itemPokemon].addEventListener('click', () => {
-            buttonNext.innerHTML += template;
-        });
-    });*/

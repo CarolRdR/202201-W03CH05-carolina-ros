@@ -5,7 +5,6 @@ async function app() {
     console.log(window.location.search.split('=')[1]);
     showHeader();
     showList(dataPokemon);
-    showButton();
 
     async function initiatePokemon() {
         const response = await fetch(URL_POKEMON);
@@ -20,11 +19,11 @@ async function app() {
 
     function showHeader() {
         let template = '';
-        template += `<h1>Pokémon </h1>
-                        <img src="./pokemon-logo.svg" alt="Pokemon Logo">
-                        <nav><ul>
-                            <li><a href="../public/index.html">Home</a></li>
-                            <li><a href="">Favourites</a></li>
+        template += `<h1>Pokémon</h1>
+                        <div class="pokemon-logo"><img src="./pokemon-logo.svg" alt="Pokemon Logo"></img></div>
+                        <nav><ul class="pokemon__navigation">
+                            <li><a class="pokemon__navigation-home" href="../public/index.html">Home</a></li>
+                            <li><a class="pokemon__navigation-favourites" href="../public/favourites.html">Favourites</a></li>
                         </ul></nav>`;
 
         document.querySelector('.header').innerHTML += template;
@@ -34,28 +33,29 @@ async function app() {
         let template = '';
         template += `
         <h2>${dataPokemon.name}</h2>
-        <img src="${dataPokemon.sprites.front_default}" alt="Pokemon shiny"></img>`;
+        <div class="pokemon-detail">
+        <img class="pokemon-image" src="${dataPokemon.sprites.front_default}" alt="Pokemon shiny"></img>
+        <img class="pokemon-image" src="${dataPokemon.sprites.front_shiny}" alt="Pokemon shiny"></img>
+        </div>`;
 
         template += `
+               <div class="pokemon-detail">
+               <div class="weight">Weight: ${dataPokemon.weight}</div>
+               <div class="height">Height: ${dataPokemon.height}</div>
+               <div class="species">Species: ${dataPokemon.species.name}</div>
+               <div class="moves">Moves: ${dataPokemon.moves[0].move.name}</div>
+               </div>`;
 
-               <span class="weight">Weight:${dataPokemon.weight}</span>
-               <span class="height">Height: ${dataPokemon.height}</span>
-               <span class="species">Species: ${dataPokemon.species.name}</span>
-               <span class="moves">Moves: ${dataPokemon.moves[0].move.name}</span>`;
+        template += `
+        <div class="button-add-delete">
+                    <button class="add-favourite">Add Favourite</button>
+                    <button class="delete-favourite">Delete Favourite</button>
+               </div>`;
 
         document.querySelector('.pokemon-detail').innerHTML = template;
     }
 
-    function showButton() {
-        let template = '';
-        template += `
-                    <button class="previous-page">Previous Page</button>
-                    <button class="next-page">Next Page</button>
-                `;
-        document.querySelector('.button-navegation').innerHTML = template;
-    }
-
-    async function buttonNext() {
+    /*async function buttonNext() {
         URL_POKEMON = dataPokemon.next;
         dataPokemon = await initiatePokemon(URL_POKEMON);
         showList(dataPokemon);
@@ -66,7 +66,7 @@ async function app() {
         URL_POKEMON = dataPokemon.previous;
         dataPokemon = await initiatePokemon(URL_POKEMON);
         showList(dataPokemon);
-    }
+    }*/
     document
         .querySelector('.previous-page')
         .addEventListener('click', buttonPrevious);
