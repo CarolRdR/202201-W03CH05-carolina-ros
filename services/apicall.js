@@ -1,8 +1,9 @@
-async function app() {
+export async function app() {
     let index = 0;
     let limit;
     let URL_POKEMON = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${index}`;
     let dataPokemon = await initiatePokemon(URL_POKEMON);
+    let pokemon = dataPokemon[dataPokemon.length - 1].id;
     showHeader();
     showList(dataPokemon);
     showButton();
@@ -10,13 +11,13 @@ async function app() {
     async function initiatePokemon() {
         const response = await fetch(URL_POKEMON);
         return response.json();
-    }
-    /*const pokemonDetails = await Promise.all(
+        /*const pokemonDetails = await Promise.all(
         dataPokemon.map(async (pokemon) => {
             const response = await fetch(pokemon.sprites);
             return response.json();
         })
     );*/
+    }
 
     function showHeader() {
         let template = '';
@@ -26,7 +27,7 @@ async function app() {
                             <li><a class="pokemon__navigation-home" href="../public/index.html">Home</a></li>
                             <li><a class="pokemon__navigation-favourites"href="../public/favourites.html">Favourites</a></li>
                         </ul></nav>`;
-        template += `<div class="pokemon-showing">SHOWING ${index} OF 1118</div>`;
+        template += `<div class="pokemon-showing">SHOWING ${pokemon} OF 1118</div>`;
 
         document.querySelector('.header').innerHTML += template;
     }
