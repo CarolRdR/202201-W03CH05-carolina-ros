@@ -10,12 +10,6 @@ async function app() {
         const response = await fetch(URL_POKEMON_LOCAL);
         return response.json();
     }
-    /*const pokemonDetails = await Promise.all(
-        dataPokemon.map(async (pokemon) => {
-            const response = await fetch(pokemon.sprites);
-            return response.json();
-        })
-    );*/
 
     function showHeader() {
         let template = '';
