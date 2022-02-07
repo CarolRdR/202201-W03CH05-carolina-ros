@@ -71,17 +71,3 @@ async function app() {
         .addEventListener('click', buttonPrevious);
 }
 document.addEventListener('DOMContentLoaded', app);
-/*let buttonPrevious = document.querySelectorAll('.previous-page');
-
-    buttonPrevious.forEach(function (e) {
-        e.addEventListener('click', () => {
-            buttonNext('transitioned').innerHTML += data.previous;
-        });
-    });*/
-
-/*initiatePokemon.forEach((itemPokemon) => {
-        let buttonNext = document.querySelectorAll('.next-page');
-        buttonNext[itemPokemon].addEventListener('click', () => {
-            buttonNext.innerHTML += template;
-        });
-    });*/
