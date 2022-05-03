@@ -6,6 +6,21 @@ async function app() {
     showList(dataPokemon);
     showButton();
 
+    // async function initiatePokemon() {
+    //     const response = {
+    //         method: 'GET',
+    //         mode: 'no-cors',
+    //         headers: {
+    //             'Access-Control-Allow-Origin': '*',
+    //             'Content-Type': 'application/json',
+    //         },
+    //     };
+
+    //     await fetch(URL_POKEMON_LOCAL.id, response);
+    //     console.log(URL_POKEMON_LOCAL.id);
+    //     return response.json();
+    // }
+
     async function initiatePokemon() {
         const response = await fetch(URL_POKEMON_LOCAL);
         return response.json();

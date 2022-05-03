@@ -4,7 +4,7 @@ async function app() {
     let dataPokemon = await initiatePokemon(URL_POKEMON, {
         mode: 'cors',
     });
-    console.log(window.location.search.split('=')[1]);
+    console.log('info', URL_POKEMON);
     showHeader();
     showList(dataPokemon);
     addPokemon();
@@ -55,6 +55,7 @@ async function app() {
     async function addPokemon() {
         URL_POKEMON = dataPokemon.name;
         dataPokemon = await initiatePokemon(URL_POKEMON);
+        console.log('add poke', dataPokemon);
 
         showList(dataPokemon);
     }
@@ -68,7 +69,7 @@ async function app() {
         dataInfo.name = dataPokemon.name;
         dataInfo.url = url_pokemon;
         dataInfo.image = dataPokemon.sprites.front_default;
-        console.log(dataInfo);
+        console.log('y esta info', dataInfo);
 
         fetch('http://localhost:3000/Pokemon/', {
             method: 'POST',
@@ -79,10 +80,10 @@ async function app() {
             mode: 'cors',
         })
             .then((response) => {
-                console.log(response);
+                console.log('que response', response);
                 return response.json();
             })
-            .then((data) => console.log(data))
+            .then((data) => console.log('que data', data))
             .catch((error) => {
                 console.log('Error:', error);
             });

@@ -3,7 +3,7 @@ export async function app() {
     let limit;
     let URL_POKEMON = `https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${index}`;
     let dataPokemon = await initiatePokemon(URL_POKEMON);
-    let pokemon = dataPokemon[dataPokemon.length - 1].id;
+    let pokemon = dataPokemon[dataPokemon.length - 1];
     showHeader();
     showList(dataPokemon);
     showButton();
@@ -11,12 +11,12 @@ export async function app() {
     async function initiatePokemon() {
         const response = await fetch(URL_POKEMON);
         return response.json();
-        /*const pokemonDetails = await Promise.all(
-        dataPokemon.map(async (pokemon) => {
-            const response = await fetch(pokemon.sprites);
-            return response.json();
-        })
-    );*/
+        //     const pokemonDetails = await Promise.all(
+        //         dataPokemon.map(async (pokemon) => {
+        //             const response = await fetch(pokemon.sprites);
+        //             return response.json();
+        //         })
+        //     );
     }
 
     function showHeader() {
@@ -36,7 +36,6 @@ export async function app() {
         let template = '';
 
         dataPokemon.results.forEach((item) => {
-            // console.log(dataPokemon);
             template += `
                 <li>
                     <a class ="pokemon-list__name" href= "../public/details.html?id=${item.url}">${item.name} </a>

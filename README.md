@@ -1,6 +1,6 @@
-# Readme
+# Week 3 - Challenge WeekEnd
 
-Week 3 - Challenge WeekEnd
+## Description
 
 Logo Pokémon
 Pokémon
@@ -18,3 +18,13 @@ El usuario debe poder añadir los pokémon que quiera a su listado local. El lis
 En cualquiera de los listados, el usuario debería poder ir al detalle de un pokémon, donde se le mostrarán más datos. A esta página de detalle se llega pasando una id por la URL (la id del pokémon que queremos ver).
 
 BEM HTML semántico Testing
+
+## Instructions
+
+Proyecto sin framework, hecho en Vanilla Javascript. Se accede desde el fichero index.html que se localiza en la carpeta public, teniendo un servidor apuntando a esa carpeta (ejemplo: Live serve de Visual Studio Code).
+
+Es imprescindible tener levantado el servidor local para acceder a Favoritos. Desde la carpeta server hay que ejecutar json-server o ejecutar directamente:
+
+```shell
+npm run server:local
+```

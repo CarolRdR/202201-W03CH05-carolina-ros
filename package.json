@@ -1,5 +1,5 @@
 {
-    "name": "name",
+    "name": "PokemonApi",
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
@@ -9,7 +9,8 @@
         "test": "jest",
         "lint": "eslint",
         "test:watch": "jest --watchAll",
-        "test:cov": "jest --coverage"
+        "test:cov": "jest --coverage",
+        "server:local": "cd server && json-server --watch db.json"
     },
     "author": "",
     "license": "ISC",
