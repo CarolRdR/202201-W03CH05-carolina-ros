@@ -28,3 +28,9 @@ Es imprescindible tener levantado el servidor local para acceder a Favoritos. De
 ```shell
 npm run server:local
 ```
+
+---
+
+<img src="https://user-images.githubusercontent.com/94986301/166471695-a1bda6bd-ef71-4d18-a286-26e44191fab5.gif">
+
+
